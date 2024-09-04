@@ -42,53 +42,73 @@ This project supports both Python and MATLAB for in vitro electrophysiology data
 ### Option 1: Installation Using Conda (Python)
 
 1. **Clone the Repository**:
-git clone https://github.com/clement-lo/my-in-vitro-electrophysiology-analysis.git
-cd my-in-vitro-electrophysiology-analysis
+    ```bash
+    git clone https://github.com/clement-lo/my-in-vitro-electrophysiology-analysis.git
+    cd my-in-vitro-electrophysiology-analysis
+    ```
 
 2. **Set Up the Conda Environment**:
-conda env create -f environment.yml
-conda activate electrophysiology
+    ```bash
+    conda env create -f environment.yml
+    conda activate electrophysiology
+    ```
 
 3. **Run the Analysis Pipeline Using Python Scripts**:
-python python/example_analysis.py
+    ```bash
+    python python/example_analysis.py
+    ```
 
-### Option 2: Installation Using venv (Python)
+### Option 2: Installation Using `venv` (Python)
+
 1. **Clone the Repository**:
-git clone https://github.com/clement-lo/my-in-vitro-electrophysiology-analysis.git
-cd my-in-vitro-electrophysiology-analysis
+    ```bash
+    git clone https://github.com/clement-lo/my-in-vitro-electrophysiology-analysis.git
+    cd my-in-vitro-electrophysiology-analysis
+    ```
 
 2. **Set Up the Virtual Environment**:
-python3 -m venv .venv
-source .venv/bin/activate  # On Mac/Linux
-.venv\Scripts\activate     # On Windows
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate  # On Mac/Linux
+    .venv\Scripts\activate     # On Windows
+    ```
 
 3. **Install Dependencies**:
-pip install -r requirements.txt
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-4. **Run the Jupyter Notebook: Launch Jupyter Notebook and open 01_example_analysis.ipynb**:
-jupyter notebook
+4. **Run the Jupyter Notebook**:
+    - Launch Jupyter Notebook and open `01_example_analysis.ipynb`:
+    ```bash
+    jupyter notebook
+    ```
 
+### Option 3: Running MATLAB Scripts
 
-### Option 3 Running MATLAB Scripts
-1.**Open MATLAB: Navigate to the matlab/ folder in MATLAB.**
-2.** Run the MATLAB Script**:
-synaptic_analysis
+1. **Open MATLAB**:
+   - Navigate to the `matlab/` folder in MATLAB.
 
-## Running the Analyses 
-1. **Synaptic Input and Output Analysis**
-   Python: python/synaptic_analysis.py
-   Jupyter Notebook: notebooks/01_Synaptic_Analysis.ipynb
-   MATLAB: matlab/synaptic_analysis.m
+2. **Run the MATLAB Script**:
+   ```matlab
+   synaptic_analysis
 
-2. **Action Potential Properties and Spike Train Analysis**
-   Python: python/spike_train_analysis.py
-   Jupyter Notebook: notebooks/02_Spike_Train_Analysis.ipynb
-   MATLAB: matlab/spike_train_analysis.m
+## Running the Analyses
 
-3. **Ion Channel Kinetics and Conductance-Based Modeling**
-   Python: python/ion_channel_kinetics.py
-   Jupyter Notebook: notebooks/03_Ion_Channel_Kinetics.ipynb
-   MATLAB: matlab/ion_channel_kinetics.m
+### 1. **Synaptic Input and Output Analysis**
+- **Python**: `python/synaptic_analysis.py`
+- **Jupyter Notebook**: `notebooks/01_Synaptic_Analysis.ipynb`
+- **MATLAB**: `matlab/synaptic_analysis.m`
+
+### 2. **Action Potential Properties and Spike Train Analysis**
+- **Python**: `python/spike_train_analysis.py`
+- **Jupyter Notebook**: `notebooks/02_Spike_Train_Analysis.ipynb`
+- **MATLAB**: `matlab/spike_train_analysis.m`
+
+### 3. **Ion Channel Kinetics and Conductance-Based Modeling**
+- **Python**: `python/ion_channel_kinetics.py`
+- **Jupyter Notebook**: `notebooks/03_Ion_Channel_Kinetics.ipynb`
+- **MATLAB**: `matlab/ion_channel_kinetics.m`
 
 (Additional analyses are outlined similarly...)
 
