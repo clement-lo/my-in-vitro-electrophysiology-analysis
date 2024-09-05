@@ -2,7 +2,7 @@
 
 ## Overview
 
-**In vitro electrophysiology** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on reproducibility, modularity, and clarity. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on basic pain research. The code is modular and organized to perform a variety of analyses including synaptic input/output characterization, action potential properties, ion channel kinetics modeling, pharmacological modulation studies, network connectivity, and time-frequency analysis for intrinsic oscillations.
+**_In vitro electrophysiology_** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on _reproducibility_, _modularity_, and _clarity_. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on **basic pain research**. The code is modular and organized to perform a variety of analyses including a) synaptic input/output characterization, b) action potential properties, c) ion channel kinetics modeling, d) pharmacological modulation studies, e) network connectivity, and f) time-frequency analysis for intrinsic oscillations.
 
 ## Key Features
 
