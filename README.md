@@ -112,7 +112,7 @@ This repository provides tools for analyzing electrophysiological data using Pyt
 
 ## 4. Analytical Functions Overview
 
-### i. **Synaptic Input and Output Analysis**:
+### a. **Synaptic Input and Output Analysis**:
 
 Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
 
@@ -120,7 +120,7 @@ Scripts and Notebooks for characterizing synaptic input/output curves, synaptic 
 - Methods: Curve fitting, response normalization, and plasticity induction protocols.
 - Outputs: Input-output curves, synaptic strength indices.
 
-### ii. **Action Potential Properties and Spike Train Analysis**:
+### b. **Action Potential Properties and Spike Train Analysis**:
 
 Tools for extracting action potential properties such as amplitude, half-width, and spike-frequency adaptation. Includes spike train analysis methods like autocorrelation and burst detection.
 
