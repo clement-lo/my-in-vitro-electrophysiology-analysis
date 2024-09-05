@@ -35,7 +35,7 @@ The repository is organized into the following directories to ensure modularity,
 │   └── 06_Time_Frequency_Analysis.ipynb           # Notebook for Time-Frequency Analysis for Intrinsic Oscillations
 ├── CONTRIBUTING.md                                # Guidelines for contributing to the repository
 └── LICENSE.md                                     # Licensing information
-
+```
 ## Key Features
 
 - Modular Codebase: Easy to extend and integrate new analysis methods.
