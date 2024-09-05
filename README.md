@@ -2,7 +2,7 @@
 **In vitro electrophysiology** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on reproducibility, modularity, and clarity. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on basic pain research. The code is modular and organized to perform a variety of analyses including synaptic input/output characterization, action potential properties, ion channel kinetics modeling, pharmacological modulation studies, network connectivity, and time-frequency analysis for intrinsic oscillations.
 
 1. **Synaptic Input and Output Analysis**:
-2. Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
+Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
 - Objective: Characterize synaptic input-output relationships.
 - Methods: Curve fitting, response normalization, and plasticity induction protocols.
 - Outputs: Input-output curves, synaptic strength indices.
