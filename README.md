@@ -219,7 +219,7 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 
 ## 7. Contributing
 
-We welcome contributions from the community! Please refer to our CONTRIBUTING.md file for guidelines on how to contribute to this repository.
+Contributions from the pain research community and other communities also ustilising in vitro electrophysiology to investigate their research questions! Please refer to CONTRIBUTING.md file for guidelines on how to contribute to this repository.
 
 ## 8. Licensing
 
@@ -250,4 +250,4 @@ To obtain a commercial license, please contact with the following information:
 - A brief description of how you intend to use the software.
 - Any specific requirements or support needs you may have.
 
-I will review your request and provide a quote and licensing agreement tailored to your needs.
+Your request will be reviewed and a quote and licensing agreement tailored to your needs will be provided.
