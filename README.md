@@ -51,14 +51,14 @@ The repository is organized into the following directories to ensure modularity,
    - [Python Scripts (.py)](#python-scripts-py)
    - [Jupyter Notebooks (.ipynb)](#jupyter-notebooks-ipynb)
    - [MATLAB Scripts](#matlab-scripts)
-4. [Analytical Functions Overview](#analytical-functions-overview)
+4. [Data Requirements](#data-requirements)   
+5. [Analytical Functions Overview](#analytical-functions-overview)
    - [Synaptic Input and Output Analysis](#a-synaptic-input-and-output-analysis)
    - [Action Potential Properties and Spike Train Analysis](#b-action-potential-properties-and-spike-train-analysis)
    - [Ion Channel Kinetics and Conductance-Based Modeling](#c-ion-channel-kinetics-and-conductance-based-modeling)
    - [Pharmacological Modulation Analysis](#d-pharmacological-modulation-analysis)
    - [Network Connectivity and Plasticity Analysis](#e-network-connectivity-and-plasticity-analysis)
    - [Time-Frequency Analysis for Intrinsic Oscillations](#f-time-frequency-analysis-for-intrinsic-oscillations)
-5. [Data Requirements](#data-requirements)
 6. [Running the Analyses](#running-the-analyses)
 7. [Contributing](#contributing)
 8. [License](#license)
@@ -143,9 +143,9 @@ This repository provides tools for analyzing electrophysiological data using Pyt
    ```
 4. **View Output**: Plots and results will be displayed in the MATLAB environment.
 
-## 4. Analytical Functions Overview
+## 5. Analytical Functions Overview
 
-### i. **Synaptic Input and Output Analysis**:
+### a. **Synaptic Input and Output Analysis**:
 
 Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
 
@@ -153,7 +153,7 @@ Scripts and Notebooks for characterizing synaptic input/output curves, synaptic 
 - Methods: Curve fitting, response normalization, and plasticity induction protocols.
 - Outputs: Input-output curves, synaptic strength indices.
 
-### ii. **Action Potential Properties and Spike Train Analysis**:
+### b. **Action Potential Properties and Spike Train Analysis**:
 
 Tools for extracting action potential properties such as amplitude, half-width, and spike-frequency adaptation. Includes spike train analysis methods like autocorrelation and burst detection.
 
@@ -193,12 +193,6 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 - Methods: Fourier and wavelet transforms, coherence analysis.
 - Outputs: Time-frequency plots, phase-amplitude coupling indices.
 
-## 5. Data Requirements
-
-This repository is designed to work with in vitro electrophysiology data typically recorded from patch-clamp or extracellular recordings. Ensure your data is in a standard format such as .abf, .mat, or .csv.
-
-- Example Data Format: We recommend .csv format for importing and processing data in Python.
-- Data Preprocessing: Raw data should be preprocessed (e.g., baseline subtraction, filtering) before analysis.
 
 ## 6. Running the Analyses
 
