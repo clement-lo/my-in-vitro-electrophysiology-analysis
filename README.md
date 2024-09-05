@@ -20,14 +20,14 @@ The repository is organized into the following directories to ensure modularity,
 │   │   ├── network_connectivity_analysis.py       # Script for Network Connectivity and Plasticity Analysis
 │   │   └── time_frequency_analysis.py             # Script for Time-Frequency Analysis for Intrinsic Oscillations
 │   ├── matlab/                                    # MATLAB scripts for data analysis
-│   │   ├── synaptic_analysis.m                    # MATLAB script for Synaptic Input and Output Analysis
+│   │   ├── synaptic_input_output_analysis.m       # MATLAB script for Synaptic Input and Output Analysis
 │   │   ├── spike_train_analysis.m                 # MATLAB script for Action Potential and Spike Train Analysis
 │   │   ├── ion_channel_kinetics.m                 # MATLAB script for Ion Channel Kinetics Analysis
 │   │   ├── pharmacological_modulation.m           # MATLAB script for Pharmacological Modulation Analysis
 │   │   ├── network_connectivity_analysis.m        # MATLAB script for Network Connectivity and Plasticity Analysis
 │   │   └── time_frequency_analysis.m              # MATLAB script for Time-Frequency Analysis for Intrinsic Oscillations
 ├── notebooks/                                     # Jupyter Notebooks for interactive analyses
-│   ├── 01_Synaptic_Analysis.ipynb                 # Notebook for Synaptic Input and Output Analysis
+│   ├── 01_Synaptic_Input_Output_Analysis.ipynb    # Notebook for Synaptic Input and Output Analysis
 │   ├── 02_Spike_Train_Analysis.ipynb              # Notebook for Action Potential and Spike Train Analysis
 │   ├── 03_Ion_Channel_Kinetics.ipynb              # Notebook for Ion Channel Kinetics Analysis
 │   ├── 04_Pharmacological_Modulation.ipynb        # Notebook for Pharmacological Modulation Analysis
@@ -53,7 +53,7 @@ The repository is organized into the following directories to ensure modularity,
    - [MATLAB Scripts](#matlab-scripts)
 4. [Data Requirements](#data-requirements)   
 5. [Analytical Functions Overview](#analytical-functions-overview)
-   - [Synaptic Input and Output Analysis](#a-synaptic-input-and-output-analysis)
+   - [Synaptic Analysis](#a-synaptic-analysis)
    - [Action Potential Properties and Spike Train Analysis](#b-action-potential-properties-and-spike-train-analysis)
    - [Ion Channel Kinetics and Conductance-Based Modeling](#c-ion-channel-kinetics-and-conductance-based-modeling)
    - [Pharmacological Modulation Analysis](#d-pharmacological-modulation-analysis)
@@ -201,9 +201,9 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 ## 6. Running the Analyses
 
 ### a. **Synaptic Input and Output Analysis**
-- **Python**: `python/synaptic_analysis.py`
-- **Jupyter Notebook**: `notebooks/01_Synaptic_Analysis.ipynb`
-- **MATLAB**: `matlab/synaptic_analysis.m`
+- **Python**: `python/synaptic_input_output_analysis.py`
+- **Jupyter Notebook**: `notebooks/01_Synaptic_Input_Output_Analysis.ipynb`
+- **MATLAB**: `matlab/synaptic_input_output_analysis.m`
 
 ### b. **Action Potential Properties and Spike Train Analysis**
 - **Python**: `python/spike_train_analysis.py`
