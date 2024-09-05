@@ -2,7 +2,39 @@
 
 ## Overview
 
-**_In vitro electrophysiology_** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on _reproducibility_, _modularity_, and _clarity_. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on **basic pain research**. The code is modular and organized to perform a variety of analyses including a) synaptic input/output characterization, b) action potential properties, c) ion channel kinetics modeling, d) pharmacological modulation studies, e) network connectivity, and f) time-frequency analysis for intrinsic oscillations.
+**In vitro electrophysiology** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on reproducibility, modularity, and clarity. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on basic pain research. The code is modular and organized to perform a variety of analyses including synaptic input/output characterization, action potential properties, ion channel kinetics modeling, pharmacological modulation studies, network connectivity, and time-frequency analysis for intrinsic oscillations.
+
+## Repository Structure
+The repository is organized into the following directories to ensure modularity, clarity, and ease of navigation:
+```plaintext
+├── README.md                                      # Main documentation file
+├── requirements.txt                               # Python dependencies for the project
+├── data/                                          # Directory for storing raw and preprocessed data
+├── results/                                       # Output directory for results from analyses
+├── scripts/                                       # Directory containing all the analysis scripts
+│   ├── python/                                    # Python scripts for data analysis
+│   │   ├── synaptic_input_output_analysis.py      # Script for Synaptic Input and Output Analysis
+│   │   ├── spike_train_analysis.py                # Script for Action Potential and Spike Train Analysis
+│   │   ├── ion_channel_kinetics.py                # Script for Ion Channel Kinetics Analysis
+│   │   ├── pharmacological_modulation.py          # Script for Pharmacological Modulation Analysis
+│   │   ├── network_connectivity_analysis.py       # Script for Network Connectivity and Plasticity Analysis
+│   │   └── time_frequency_analysis.py             # Script for Time-Frequency Analysis for Intrinsic Oscillations
+│   ├── matlab/                                    # MATLAB scripts for data analysis
+│   │   ├── synaptic_analysis.m                    # MATLAB script for Synaptic Input and Output Analysis
+│   │   ├── spike_train_analysis.m                 # MATLAB script for Action Potential and Spike Train Analysis
+│   │   ├── ion_channel_kinetics.m                 # MATLAB script for Ion Channel Kinetics Analysis
+│   │   ├── pharmacological_modulation.m           # MATLAB script for Pharmacological Modulation Analysis
+│   │   ├── network_connectivity_analysis.m        # MATLAB script for Network Connectivity and Plasticity Analysis
+│   │   └── time_frequency_analysis.m              # MATLAB script for Time-Frequency Analysis for Intrinsic Oscillations
+├── notebooks/                                     # Jupyter Notebooks for interactive analyses
+│   ├── 01_Synaptic_Analysis.ipynb                 # Notebook for Synaptic Input and Output Analysis
+│   ├── 02_Spike_Train_Analysis.ipynb              # Notebook for Action Potential and Spike Train Analysis
+│   ├── 03_Ion_Channel_Kinetics.ipynb              # Notebook for Ion Channel Kinetics Analysis
+│   ├── 04_Pharmacological_Modulation.ipynb        # Notebook for Pharmacological Modulation Analysis
+│   ├── 05_Network_Connectivity_Analysis.ipynb     # Notebook for Network Connectivity and Plasticity Analysis
+│   └── 06_Time_Frequency_Analysis.ipynb           # Notebook for Time-Frequency Analysis for Intrinsic Oscillations
+├── CONTRIBUTING.md                                # Guidelines for contributing to the repository
+└── LICENSE.md                                     # Licensing information
 
 ## Key Features
 
@@ -26,6 +58,7 @@
    - [Pharmacological Modulation Analysis](#d-pharmacological-modulation-analysis)
    - [Network Connectivity and Plasticity Analysis](#e-network-connectivity-and-plasticity-analysis)
    - [Time-Frequency Analysis for Intrinsic Oscillations](#f-time-frequency-analysis-for-intrinsic-oscillations)
+5. [Data Requirements] (#data-requirements)
 5. [Running the Analyses](#running-the-analyses)
 6. [Contributing](#contributing)
 7. [License](#license)
@@ -112,7 +145,7 @@ This repository provides tools for analyzing electrophysiological data using Pyt
 
 ## 4. Analytical Functions Overview
 
-### a. **Synaptic Input and Output Analysis**:
+### i. **Synaptic Input and Output Analysis**:
 
 Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
 
@@ -120,7 +153,7 @@ Scripts and Notebooks for characterizing synaptic input/output curves, synaptic 
 - Methods: Curve fitting, response normalization, and plasticity induction protocols.
 - Outputs: Input-output curves, synaptic strength indices.
 
-### b. **Action Potential Properties and Spike Train Analysis**:
+### ii. **Action Potential Properties and Spike Train Analysis**:
 
 Tools for extracting action potential properties such as amplitude, half-width, and spike-frequency adaptation. Includes spike train analysis methods like autocorrelation and burst detection.
 
@@ -160,14 +193,14 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 - Methods: Fourier and wavelet transforms, coherence analysis.
 - Outputs: Time-frequency plots, phase-amplitude coupling indices.
 
-### Data Requirements
+### 5. Data Requirements
 
 This repository is designed to work with in vitro electrophysiology data typically recorded from patch-clamp or extracellular recordings. Ensure your data is in a standard format such as .abf, .mat, or .csv.
 
 - Example Data Format: We recommend .csv format for importing and processing data in Python.
 - Data Preprocessing: Raw data should be preprocessed (e.g., baseline subtraction, filtering) before analysis.
 
-## 5. Running the Analyses
+## 6. Running the Analyses
 
 ### a. **Synaptic Input and Output Analysis**
 - **Python**: `python/synaptic_analysis.py`
@@ -186,11 +219,11 @@ This repository is designed to work with in vitro electrophysiology data typical
 
 (Additional analyses are outlined similarly...)
 
-## Contributing
+## 7. Contributing
 
 We welcome contributions from the community! Please refer to our CONTRIBUTING.md file for guidelines on how to contribute to this repository.
 
-## Licensing
+## 8. Licensing
 
 This repository is available under a dual-license model:
 
