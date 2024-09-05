@@ -53,7 +53,7 @@ The repository is organized into the following directories to ensure modularity,
    - [MATLAB Scripts](#matlab-scripts)
 4. [Data Requirements](#data-requirements)   
 5. [Analytical Functions Overview](#analytical-functions-overview)
-   - [Synaptic Analysis](#a-synaptic-analysis)
+   - [Synaptic Input and Output Analysis](#a-synaptic-input-output-analysis)
    - [Action Potential Properties and Spike Train Analysis](#b-action-potential-properties-and-spike-train-analysis)
    - [Ion Channel Kinetics and Conductance-Based Modeling](#c-ion-channel-kinetics-and-conductance-based-modeling)
    - [Pharmacological Modulation Analysis](#d-pharmacological-modulation-analysis)
