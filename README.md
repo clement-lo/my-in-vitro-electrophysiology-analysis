@@ -35,7 +35,7 @@ The repository is organized into the following directories to ensure modularity,
 │   └── 06_Time_Frequency_Analysis.ipynb           # Notebook for Time-Frequency Analysis for Intrinsic Oscillations
 ├── CONTRIBUTING.md                                # Guidelines for contributing to the repository
 └── LICENSE.md                                     # Licensing information
-```
+
 ## Key Features
 
 - Modular Codebase: Easy to extend and integrate new analysis methods.
@@ -76,7 +76,7 @@ Ensure you have the following installed on your system:
 - MATLAB (optional, for some analyses)
 - Git (for version control)
 
-### 2. Installation
+## 2. Installation
 
 To get started with this repository, follow the steps below:
 
@@ -104,11 +104,11 @@ To get started with this repository, follow the steps below:
 4. **Verify Installation**:
    Run `python --version` and `pip list` to confirm Python and required packages are installed correctly.
 
-### 3. Usage Guide
+## 3. Usage Guide
 
 This repository provides tools for analyzing electrophysiological data using Python scripts, Jupyter Notebooks, and MATLAB. Follow the instructions below to understand how to use each type of script.
 
-#### Python Scripts (.py)
+### Python Scripts (.py)
 
 1. **Navigate to the Python Scripts Directory**:
    ```bash
@@ -193,7 +193,7 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 - Methods: Fourier and wavelet transforms, coherence analysis.
 - Outputs: Time-frequency plots, phase-amplitude coupling indices.
 
-### 5. Data Requirements
+## 5. Data Requirements
 
 This repository is designed to work with in vitro electrophysiology data typically recorded from patch-clamp or extracellular recordings. Ensure your data is in a standard format such as .abf, .mat, or .csv.
 
