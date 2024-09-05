@@ -58,10 +58,10 @@ The repository is organized into the following directories to ensure modularity,
    - [Pharmacological Modulation Analysis](#d-pharmacological-modulation-analysis)
    - [Network Connectivity and Plasticity Analysis](#e-network-connectivity-and-plasticity-analysis)
    - [Time-Frequency Analysis for Intrinsic Oscillations](#f-time-frequency-analysis-for-intrinsic-oscillations)
-5. [Data Requirements] (#data-requirements)
-5. [Running the Analyses](#running-the-analyses)
-6. [Contributing](#contributing)
-7. [License](#license)
+5. [Data Requirements](#data-requirements)
+6. [Running the Analyses](#running-the-analyses)
+7. [Contributing](#contributing)
+8. [License](#license)
 
 ## 1. Getting Started
 
