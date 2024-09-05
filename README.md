@@ -2,7 +2,7 @@
 
 ## Overview
 
-**In vitro electrophysiology** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on reproducibility, modularity, and clarity. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on basic pain research. The code is modular and organized to perform a variety of analyses including synaptic input/output characterization, action potential properties, ion channel kinetics modeling, pharmacological modulation studies, network connectivity, and time-frequency analysis for intrinsic oscillations.
+**In vitro electrophysiology** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on reproducibility, modularity, and clarity. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, with a focus on basic pain research. The code is modular and organized to perform a variety of analyses including synaptic input/output characterization, action potential properties, ion channel kinetics modeling, pharmacological modulation studies, network connectivity, and time-frequency analysis for intrinsic oscillations.
 
 ## Repository Structure
 The repository is organized into the following directories to ensure modularity, clarity, and ease of navigation:
@@ -144,7 +144,7 @@ This repository provides tools for analyzing electrophysiological data using Pyt
 4. **View Output**: Plots and results will be displayed in the MATLAB environment.
 
 ## 4. Data Requirements
-This repository is designed to work with in vitro electrophysiology data typically recorded from patch-clamp or extracellular recordings. Ensure your data is in a standard format such as .abf, .mat, or .csv.
+This repository is designed to work with in vitro electrophysiology data typically recorded from patch-clamp or extracellular recordings. Ensure your data is in a standard format such as *.abf*, *.mat*, or *.csv*.
 - Example Data Format: We recommend .csv format for importing and processing data in Python.
 - Data Preprocessing: Raw data should be preprocessed (e.g., baseline subtraction, filtering) before analysis.
 
