@@ -143,6 +143,11 @@ This repository provides tools for analyzing electrophysiological data using Pyt
    ```
 4. **View Output**: Plots and results will be displayed in the MATLAB environment.
 
+## 4. Data Requirements
+This repository is designed to work with in vitro electrophysiology data typically recorded from patch-clamp or extracellular recordings. Ensure your data is in a standard format such as .abf, .mat, or .csv.
+- Example Data Format: We recommend .csv format for importing and processing data in Python.
+- Data Preprocessing: Raw data should be preprocessed (e.g., baseline subtraction, filtering) before analysis.
+
 ## 5. Analytical Functions Overview
 
 ### a. **Synaptic Input and Output Analysis**:
@@ -192,7 +197,6 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 - Objective: Characterize oscillatory activity and its modulation.
 - Methods: Fourier and wavelet transforms, coherence analysis.
 - Outputs: Time-frequency plots, phase-amplitude coupling indices.
-
 
 ## 6. Running the Analyses
 
