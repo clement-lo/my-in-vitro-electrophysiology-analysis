@@ -1,4 +1,3 @@
-
 This repository contains Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on basic pain research. The code is modular and organized to perform a variety of analyses including synaptic input/output characterization, action potential properties, ion channel kinetics modeling, pharmacological modulation studies, network connectivity, and time-frequency analysis for intrinsic oscillations.
 
 
@@ -6,38 +5,37 @@ This repository contains Python scripts, Jupyter Notebooks, and MATLAB code for 
 **In vitro electrophysiology** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on reproducibility, modularity, and clarity. The analysis pipelines covered in this repository include:
 
 1. **Synaptic Input and Output Analysis**
-- Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
+Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
 - Objective: Characterize synaptic input-output relationships.
 - Methods: Curve fitting, response normalization, and plasticity induction protocols.
 - Outputs: Input-output curves, synaptic strength indices.
 
 2. **Action Potential Properties and Spike Train Analysis**
-- Tools for extracting action potential properties such as amplitude, half-width, and spike-frequency adaptation. Includes spike train analysis methods like autocorrelation and burst detection.
+Tools for extracting action potential properties such as amplitude, half-width, and spike-frequency adaptation. Includes spike train analysis methods like autocorrelation and burst detection.
 - Objective: Quantify action potential waveform features and analyze spike train dynamics.
 - Methods: Peak detection, inter-spike interval histogram, and bursting analysis.
 - Outputs: Spike train raster plots, firing rate histograms.
 
- In Vitro Electrophysiology Data Analysis
 3. **Ion Channel Kinetics and Conductance-Based Modeling**
-- Scripts for modeling ion channel kinetics using Hodgkin-Huxley models or more advanced conductance-based models.
+Scripts for modeling ion channel kinetics using Hodgkin-Huxley models or more advanced conductance-based models.
 - Objective: Simulate and analyze ion channel kinetics and neuronal excitability.
 - Methods: Hodgkin-Huxley and other conductance-based models.
 - Outputs: Simulated action potentials, current-voltage relationships.
 
 4. **Pharmacological Modulation Analysis**
-- Analysis tools for assessing the effects of pharmacological agents on synaptic transmission and intrinsic membrane properties.
+Analysis tools for assessing the effects of pharmacological agents on synaptic transmission and intrinsic membrane properties.
 - Objective: Assess the effects of pharmacological agents on neurons.
 - Methods: Dose-response curves, statistical significance testing.
 - Outputs: Concentration-response curves, EC50 values.
 
 5. **Network Connectivity and Plasticity Analysis**
-- Functions for analyzing network connectivity using graph theory metrics, and for modeling synaptic plasticity phenomena (e.g., LTP/LTD).
+Functions for analyzing network connectivity using graph theory metrics, and for modeling synaptic plasticity phenomena (e.g., LTP/LTD).
 - Objective: Analyze network connectivity and synaptic plasticity.
 - Methods: Graph theory metrics, LTP/LTD induction protocols.
 - Outputs: Network graphs, synaptic weight matrices.
 
 6. **Time-Frequency Analysis for Intrinsic Oscillations**
-- Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations, including phase-amplitude coupling and coherence analysis.
+Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations, including phase-amplitude coupling and coherence analysis.
 - Objective: Characterize oscillatory activity and its modulation.
 - Methods: Fourier and wavelet transforms, coherence analysis.
 - Outputs: Time-frequency plots, phase-amplitude coupling indices.
@@ -49,9 +47,7 @@ This repository contains Python scripts, Jupyter Notebooks, and MATLAB code for 
 - Comprehensive Examples: Jupyter Notebooks provided for interactive data exploration and visualization.
 
 ## Repository Structure
-
 The repository is organized as follows:
-
 - `python/`: Python scripts for automated data processing and analysis.
 - `matlab/`: MATLAB scripts for data processing and modeling.
 - `notebooks/`: Jupyter notebooks providing step-by-step interactive analysis workflows.
