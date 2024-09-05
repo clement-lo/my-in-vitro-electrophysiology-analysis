@@ -1,6 +1,13 @@
 ## Overview
 **_In vitro electrophysiology_** involves recording the electrical properties of neurons in a controlled environment, such as in brain slices or cultured cells. This repository provides a comprehensive analysis workflow with a focus on _reproducibility_, _modularity_, and _clarity_. The analysis pipelines contain Python scripts, Jupyter Notebooks, and MATLAB code for in vitro electrophysiology data analysis, particularly focusing on basic **pain research**. The code is modular and organized to perform a variety of analyses including **synaptic input/output characterization**, **action potential properties**, **ion channel kinetics modeling**, **pharmacological modulation studies**, **network connectivity and plasticity analysis**, and **time-frequency analysis for intrinsic oscillations**.
 
+## Key Features
+- Modular Codebase: Easy to extend and integrate new analysis methods.
+- Python and MATLAB Compatibility: Scripts are provided in both Python and MATLAB for flexibility.
+- Detailed Documentation: Step-by-step instructions for setting up and running each analysis.
+- Comprehensive Examples: Jupyter Notebooks provided for interactive data exploration and visualization.
+
+## Analysis Types
 1. **Synaptic Input and Output Analysis**:
 Scripts and Notebooks for characterizing synaptic input/output curves, synaptic integration, and synaptic plasticity.
 - Objective: Characterize synaptic input-output relationships.
@@ -36,12 +43,6 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 - Objective: Characterize oscillatory activity and its modulation.
 - Methods: Fourier and wavelet transforms, coherence analysis.
 - Outputs: Time-frequency plots, phase-amplitude coupling indices.
-
-## Key Features
-- Modular Codebase: Easy to extend and integrate new analysis methods.
-- Python and MATLAB Compatibility: Scripts are provided in both Python and MATLAB for flexibility.
-- Detailed Documentation: Step-by-step instructions for setting up and running each analysis.
-- Comprehensive Examples: Jupyter Notebooks provided for interactive data exploration and visualization.
 
 ## Repository Structure
 The repository is organized as follows:
