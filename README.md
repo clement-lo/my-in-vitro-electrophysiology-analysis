@@ -234,5 +234,3 @@ This repository is available under a dual-license model:
    - For companies, organizations, or individuals seeking to use this code in proprietary software or for commercial purposes, a separate commercial license is required. This license allows the use of the code without the restrictions of the GPL, including the ability to keep derivative works closed-source.
 
    If you are interested in obtaining a commercial license, please contact me to discuss further
-
-Your request will be reviewed and a quote and licensing agreement tailored to your needs will be provided.
