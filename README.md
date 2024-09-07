@@ -7,34 +7,34 @@
 ## Repository Structure
 The repository is organized into the following directories to ensure modularity, clarity, and ease of navigation:
 ```plaintext
-├── README.md                                      # Main documentation file
-├── requirements.txt                               # Python dependencies for the project
-├── data/                                          # Directory for storing raw and preprocessed data
-├── results/                                       # Output directory for results from analyses
-├── scripts/                                       # Directory containing all the analysis scripts
-│   ├── python/                                    # Python scripts for data analysis
-│   │   ├── synaptic_input_output_analysis.py      # Script for Synaptic Input and Output Analysis
-│   │   ├── spike_train_analysis.py                # Script for Action Potential and Spike Train Analysis
-│   │   ├── ion_channel_kinetics.py                # Script for Ion Channel Kinetics Analysis
-│   │   ├── pharmacological_modulation.py          # Script for Pharmacological Modulation Analysis
-│   │   ├── network_connectivity_analysis.py       # Script for Network Connectivity and Plasticity Analysis
-│   │   └── time_frequency_analysis.py             # Script for Time-Frequency Analysis for Intrinsic Oscillations
-│   ├── matlab/                                    # MATLAB scripts for data analysis
-│   │   ├── synaptic_input_output_analysis.m       # MATLAB script for Synaptic Input and Output Analysis
-│   │   ├── spike_train_analysis.m                 # MATLAB script for Action Potential and Spike Train Analysis
-│   │   ├── ion_channel_kinetics.m                 # MATLAB script for Ion Channel Kinetics Analysis
-│   │   ├── pharmacological_modulation.m           # MATLAB script for Pharmacological Modulation Analysis
-│   │   ├── network_connectivity_analysis.m        # MATLAB script for Network Connectivity and Plasticity Analysis
-│   │   └── time_frequency_analysis.m              # MATLAB script for Time-Frequency Analysis for Intrinsic Oscillations
-├── notebooks/                                     # Jupyter Notebooks for interactive analyses
-│   ├── 01_Synaptic_Input_Output_Analysis.ipynb    # Notebook for Synaptic Input and Output Analysis
-│   ├── 02_Spike_Train_Analysis.ipynb              # Notebook for Action Potential and Spike Train Analysis
-│   ├── 03_Ion_Channel_Kinetics.ipynb              # Notebook for Ion Channel Kinetics Analysis
-│   ├── 04_Pharmacological_Modulation.ipynb        # Notebook for Pharmacological Modulation Analysis
-│   ├── 05_Network_Connectivity_Analysis.ipynb     # Notebook for Network Connectivity and Plasticity Analysis
-│   └── 06_Time_Frequency_Analysis.ipynb           # Notebook for Time-Frequency Analysis for Intrinsic Oscillations
-├── CONTRIBUTING.md                                # Guidelines for contributing to the repository
-└── LICENSE.md                                     # Licensing information
+├── README.md                                                   # Main documentation file
+├── requirements.txt                                            # Python dependencies for the project
+├── data/                                                       # Directory for storing raw and preprocessed data
+├── results/                                                    # Output directory for results from analyses
+├── scripts/                                                    # Directory containing all the analysis scripts
+│   ├── python/                                                 # Python scripts for data analysis
+│   │   ├── synaptic_input_output_analysis.py                     # Script for Synaptic Input and Output Analysis
+│   │   ├── action_potential_spike_train_analysis.py              # Script for Action Potential and Spike Train Analysis
+│   │   ├── ion_channel_kinetics.py                               # Script for Ion Channel Kinetics Analysis
+│   │   ├── pharmacological_modulation.py                         # Script for Pharmacological Modulation Analysis
+│   │   ├── network_connectivity_plasticity_analysis.py           # Script for Network Connectivity and Plasticity Analysis
+│   │   └── time_frequency_analysis.py                            # Script for Time-Frequency Analysis for Intrinsic Oscillations
+│   ├── matlab/                                                 # MATLAB scripts for data analysis
+│   │   ├── synaptic_input_output_analysis.m                       # MATLAB script for Synaptic Input and Output Analysis
+│   │   ├── action_poential_spike_train_analysis.m                 # MATLAB script for Action Potential and Spike Train Analysis
+│   │   ├── ion_channel_kinetics.m                                 # MATLAB script for Ion Channel Kinetics Analysis
+│   │   ├── pharmacological_modulation.m                           # MATLAB script for Pharmacological Modulation Analysis
+│   │   ├── network_connectivity_plasticity_analysis.m             # MATLAB script for Network Connectivity and Plasticity Analysis
+│   │   └── time_frequency_analysis.m                              # MATLAB script for Time-Frequency Analysis for Intrinsic Oscillations
+├── notebooks/                                                   # Jupyter Notebooks for interactive analyses
+│   ├── 01_Synaptic_Input_Output_Analysis.ipynb                    # Notebook for Synaptic Input and Output Analysis
+│   ├── 02_Action_Potential_Spike_Train_Analysis.ipynb             # Notebook for Action Potential and Spike Train Analysis
+│   ├── 03_Ion_Channel_Kinetics.ipynb                              # Notebook for Ion Channel Kinetics Analysis
+│   ├── 04_Pharmacological_Modulation.ipynb                        # Notebook for Pharmacological Modulation Analysis
+│   ├── 05_Network_Connectivity_Plasticity_Analysis.ipynb          # Notebook for Network Connectivity and Plasticity Analysis
+│   └── 06_Time_Frequency_Analysis.ipynb                           # Notebook for Time-Frequency Analysis for Intrinsic Oscillations
+├── CONTRIBUTING.md                                                # Guidelines for contributing to the repository
+└── LICENSE.md                                                    # Licensing information
 ```
 ## Key Features
 
