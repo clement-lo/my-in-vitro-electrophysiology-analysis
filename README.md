@@ -233,21 +233,6 @@ This repository is available under a dual-license model:
 
    - For companies, organizations, or individuals seeking to use this code in proprietary software or for commercial purposes, a separate commercial license is required. This license allows the use of the code without the restrictions of the GPL, including the ability to keep derivative works closed-source.
 
-   If you are interested in obtaining a commercial license, please contact me to discuss terms and pricing.
-
-### Key Features of the Commercial License:
-
-- No obligation to disclose source code modifications.
-- Ability to use the code in closed-source projects.
-- Custom support and maintenance options are available.
-- Licensing fees and/or royalties apply.
-
-### How to Apply for a Commercial License
-
-To obtain a commercial license, please contact with the following information:
-
-- Your name, company, and contact information.
-- A brief description of how you intend to use the software.
-- Any specific requirements or support needs you may have.
+   If you are interested in obtaining a commercial license, please contact me to discuss further
 
 Your request will be reviewed and a quote and licensing agreement tailored to your needs will be provided.
