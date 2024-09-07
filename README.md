@@ -206,9 +206,9 @@ Wavelet and Fourier transform-based methods for analyzing intrinsic oscillations
 - **MATLAB**: `matlab/synaptic_input_output_analysis.m`
 
 ### b. **Action Potential Properties and Spike Train Analysis**
-- **Python**: `python/spike_train_analysis.py`
-- **Jupyter Notebook**: `notebooks/02_Spike_Train_Analysis.ipynb`
-- **MATLAB**: `matlab/spike_train_analysis.m`
+- **Python**: `python/action_potential_spike_train_analysis.py`
+- **Jupyter Notebook**: `notebooks/02_Action_Potential_Spike_Train_Analysis.ipynb`
+- **MATLAB**: `matlab/action_potential_spike_train_analysis.m`
 
 ### c. **Ion Channel Kinetics and Conductance-Based Modeling**
 - **Python**: `python/ion_channel_kinetics.py`
