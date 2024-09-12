@@ -18,3 +18,4 @@ data/*.xlsx
 
 # Ignore VSCode specific settings
 .vscode/
+venv/

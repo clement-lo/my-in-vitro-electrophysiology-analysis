@@ -1,0 +1,20 @@
+# requirements.txt
+
+# Core Scientific Libraries
+numpy==1.23.5          # Fundamental package for numerical computation
+scipy==1.10.1          # Library for scientific and technical computing (e.g., signal processing)
+matplotlib==3.6.0      # Plotting and visualization
+pandas==1.5.3          # Data manipulation and analysis
+
+# Libraries for Electrophysiological Analysis
+elephant==0.11.0       # Electrophysiology data analysis toolkit (spike train analysis)
+neo==0.10.2            # Handling electrophysiological data (Neo object support)
+
+# Libraries for Time-Frequency Analysis
+pywavelets==1.4.1      # Wavelet transforms for time-frequency analysis
+
+# Libraries for Network and Connectivity Analysis
+networkx==3.1          # Network analysis and graph theory
+
+# Statistical Modeling and Curve Fitting
+statsmodels==0.14.0    # Statistical models for dose-response analysis and more
