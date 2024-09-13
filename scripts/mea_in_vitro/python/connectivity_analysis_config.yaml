@@ -1,0 +1,14 @@
+# Preprocessing configuration
+bin_size: 5 ms  # Bin size for spike train binning, in milliseconds
+
+# Granger causality configuration
+max_lag: 10  # Maximum number of lags to test for Granger causality
+
+# Visualization configuration
+significance_level: 0.05  # P-value threshold for Granger causality graph
+
+# Logging configuration
+log_level: INFO  # Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+
+# Example file path
+example_file_path: 'data/example_mea_data.smr'  # Adjust the path for your dataset

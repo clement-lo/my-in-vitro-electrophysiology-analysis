@@ -1,21 +1,112 @@
-# Ignore Python cache files
+# Python cache files
 __pycache__/
 *.py[cod]
+*$py.class
 
-# Ignore Jupyter Notebook checkpoints
+# Python virtual environments
+env/
+venv/
+ENV/
+.venv/
+.env/
+
+# Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# Ignore environment folders
-env/
-.venv/
+# Data files
+data/
+*.csv
+*.xlsx
+*.h5
+*.mat
+*.plx
+*.pl2
+*.ncs
+*.nse
+*.ntt
+*.nev
+*.tdt
+*.abf
+*.ns1
+*.ns2
+*.ns5
+*.bin
+*.dat
+*.kwik
+*.kwx
+*.phy
+*.nwb
+*.mda
+*.wav
 
-# Ignore data files
-data/*.csv
-data/*.xlsx
+# Results and output files
+results/
+*.png
+*.svg
+*.pdf
+*.jpg
+*.eps
 
-# Ignore system files (macOS)
+# MATLAB generated files
+*.mex*
+*.fig
+*.log
+
+# NumPy and SciPy generated files
+*.npy
+*.npz
+
+# Unit test reports
+tests/__pycache__/
+tests/.pytest_cache/
+tests/*.pyc
+tests/*.pyo
+tests/.coverage
+tests/.mypy_cache/
+tests/.hypothesis/
+tests/htmlcov/
+
+# Notebooks Directory
+notebooks/*.ipynb
+notebooks/.ipynb_checkpoints/
+
+# Ignore examples folder if users upload example data
+examples/
+examples/*.csv
+examples/*.h5
+
+# Operating system files
 .DS_Store
+Thumbs.db
 
-# Ignore VSCode specific settings
+# IDEs and editor-specific files
 .vscode/
-venv/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Python egg files
+*.egg-info/
+*.egg
+
+# Virtual environments
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Git directories
+.git/
+.gitignore
