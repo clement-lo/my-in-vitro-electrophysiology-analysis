@@ -1,0 +1,48 @@
+# Configuration file for advanced_spike_sorting_clustering.py
+
+# General Settings
+logging_level: INFO  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# Data Loading
+data:
+  file_path: "data/example_mea_data.dat"  # Path to the input data file
+
+# Preprocessing Settings
+preprocessing:
+  freq_min: 300  # Minimum frequency for bandpass filter (Hz)
+  freq_max: 3000  # Maximum frequency for bandpass filter (Hz)
+  common_ref_type: "median"  # Type of common reference ('median', 'average', etc.)
+
+# Spike Sorting Settings
+spike_sorting:
+  sorter_name: "kilosort2"  # Name of the spike sorting algorithm (e.g., 'kilosort2')
+  gpu_available: true  # Use GPU acceleration if available
+
+# Dimensionality Reduction Settings
+dimensionality_reduction:
+  method: "umap"  # Dimensionality reduction method ('pca', 'tsne', 'umap')
+  n_components: 2  # Number of dimensions to reduce to
+
+# Clustering Settings
+clustering:
+  method: "hdbscan"  # Clustering method ('hdbscan')
+  min_cluster_size: 10  # Minimum cluster size for HDBSCAN
+
+# Visualization Settings
+visualization:
+  plot_clusters: true  # Plot clusters of spikes in 2D or 3D space
+  plot_large_scale: true  # Use Datashader for large-scale visualization
+
+# Correlogram and Network Analysis
+correlogram_analysis:
+  compute_and_plot: true  # Whether to compute and plot cross-correlograms
+
+# Output Settings
+output:
+  waveform_folder: "waveforms"  # Folder to save extracted waveforms
+  remove_existing_folder: true  # Remove existing folder before saving new waveforms
+  save_plots: false  # Whether to save plots instead of just showing them
+
+# Parallel Processing
+parallel_processing:
+  n_jobs: -1  # Number of jobs for parallel processing (-1 means use all processors)

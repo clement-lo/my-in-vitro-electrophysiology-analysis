@@ -2,6 +2,7 @@
 
 # Import necessary libraries
 import logging  # For logging
+import yaml  # For loading YAML configuration files
 import neo  # For data handling and loading
 import spikeinterface as si  # Core module for SpikeInterface
 import spikeinterface.extractors as se  # For extracting data
@@ -25,6 +26,10 @@ from datashader import transfer_functions as tf
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Load configuration from YAML file
+with open('config_advanced_spike_sorting_clustering.yaml', 'r') as file:
+    config = yaml.safe_load(file)
 
 # 1. Utility Functions
 def validate_data(data):
@@ -60,7 +65,7 @@ def load_mea_data(file_path):
         raise
 
 # 3. Preprocessing Module
-def preprocess_data(recording, freq_min=300, freq_max=3000, common_ref_type='median'):
+def preprocess_data(recording, freq_min, freq_max, common_ref_type):
     """
     Preprocess the loaded data by applying bandpass filtering and common reference.
     
@@ -83,7 +88,7 @@ def preprocess_data(recording, freq_min=300, freq_max=3000, common_ref_type='med
         raise
 
 # 4. Spike Sorting Module with GPU Support and Optimization
-def sort_spikes(recording, sorter_name='kilosort2', gpu_available=False):
+def sort_spikes(recording, sorter_name, gpu_available):
     """
     Perform spike sorting on the preprocessed data.
     
@@ -203,31 +208,67 @@ def compute_and_plot_correlograms(sorting):
         raise
 
 # Main function
-def main(file_path, gpu_available=False):
+def main(config):
     """
     Main function to perform advanced spike sorting and clustering analysis.
     
     Args:
-    - file_path (str): Path to the data file.
-    - gpu_available (bool): Whether to use GPU acceleration if available.
+    - config (dict): Configuration dictionary loaded from YAML file.
     """
     try:
+        # Extract parameters from configuration
+        file_path = config['data']['file_path']
+        gpu_available = config['spike_sorting']['gpu_available']
+        freq_min = config['preprocessing']['freq_min']
+        freq_max = config['preprocessing']['freq_max']
+        common_ref_type = config['preprocessing']['common_ref_type']
+        sorter_name = config['spike_sorting']['sorter_name']
+        ms_before = config['waveform_extraction']['ms_before']
+        ms_after = config['waveform_extraction']['ms_after']
+        reduction_method = config['dimensionality_reduction']['method']
+        n_components = config['dimensionality_reduction']['n_components']
+        clustering_method = config['clustering']['method']
+        visualize_large_scale = config['visualization']['large_scale']
+
+        # Step 1: Load Data
         recording = load_mea_data(file_path)
-        recording_preprocessed = preprocess_data(recording)
-        sorting = sort_spikes(recording_preprocessed, gpu_available=gpu_available)
-        waveform_extractor = spost.WaveformExtractor.create(recording_preprocessed, sorting, folder='waveforms', remove_existing_folder=True)
-        waveform_extractor.set_params(ms_before=1.5, ms_after=2.5)
+        
+        # Step 2: Preprocess Data
+        recording_preprocessed = preprocess_data(recording, freq_min, freq_max, common_ref_type)
+        
+        # Step 3: Perform Spike Sorting
+        sorting = sort_spikes(recording_preprocessed, sorter_name, gpu_available)
+        
+        # Step 4: Extract Waveforms
+        waveform_extractor = spost.WaveformExtractor.create(
+            recording_preprocessed, sorting, folder='waveforms', remove_existing_folder=True
+        )
+        waveform_extractor.set_params(ms_before=ms_before, ms_after=ms_after)
         waveform_extractor.run()
         features = waveform_extractor.get_all_features()
-        reduced_features = reduce_dimensions(features, method='umap')
-        labels = cluster_spikes(reduced_features)
+        
+        # Step 5: Dimensionality Reduction
+        reduced_features = reduce_dimensions(features, method=reduction_method, n_components=n_components)
+        
+        # Step 6: Spike Clustering
+        labels = cluster_spikes(reduced_features, method=clustering_method)
+        
+        # Step 7: Visualize Results
         plot_clusters(reduced_features, labels)
-        plot_large_scale_visualization(reduced_features, labels)
+        if visualize_large_scale:
+            plot_large_scale_visualization(reduced_features, labels)
+        
+        # Step 8: Compute and Plot Cross-Correlograms
         compute_and_plot_correlograms(sorting)
+    
     except Exception as e:
         log_exception(e)
         raise
 
 if __name__ == "__main__":
-    example_file_path = 'data/example_mea_data.dat'  # Adjust the path for your dataset
-    main(example_file_path, gpu_available=True)
+    # Load configuration file
+    with open('config_advanced_spike_sorting_clustering.yaml', 'r') as file:
+        config = yaml.safe_load(file)
+    
+    # Run the main analysis pipeline using configuration parameters
+    main(config)

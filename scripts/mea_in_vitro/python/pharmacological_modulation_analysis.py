@@ -1,226 +1,240 @@
 # pharmacological_modulation_analysis.py
 
-# Import necessary libraries
 import logging
+import yaml  # For configuration management
 import pyabf  # For handling ABF (Axon Binary Format) files
 import neo  # For handling Neo-compatible formats
+import spikeinterface as si  # For spike sorting and analysis
+import spikeinterface.extractors as se  # For extracting data
+import spikeinterface.preprocessing as sp  # For data preprocessing
+import spikeinterface.sorters as ss  # For spike sorting algorithms
+import spikeinterface.postprocessing as spost  # For postprocessing sorted data
 import numpy as np  # For numerical operations
 import matplotlib.pyplot as plt  # For static visualization
 import plotly.express as px  # For interactive visualization
+import quantities as pq  # For unit handling
 from scipy.signal import detrend, butter, sosfilt, find_peaks  # For signal preprocessing and peak detection
 from scipy.optimize import curve_fit  # For fitting dose-response curves
+import networkx as nx  # For graph construction and analysis
+from cdlib import algorithms as cd  # For community detection algorithms
+from joblib import Parallel, delayed  # For parallel processing
+from elephant.spike_train_correlation import corrcoef  # For cross-correlation analysis
 
-# Configure logging for detailed output
+# Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Custom exceptions for specific errors
-class DataLoadingError(Exception):
-    """Custom exception for errors in loading data."""
-    pass
+# 1. Utility Functions Module
+def load_config(config_file):
+    """Load configuration settings from a YAML file."""
+    try:
+        with open(config_file, 'r') as file:
+            config = yaml.safe_load(file)
+        logging.info(f"Configuration loaded from {config_file}.")
+        return config
+    except Exception as e:
+        logging.error(f"Failed to load configuration: {e}")
+        raise
 
-class AnalysisError(Exception):
-    """Custom exception for errors during data analysis."""
-    pass
+def log_exception(exception):
+    logging.error(f"An error occurred: {exception}")
 
-# 1. Data Loading Module
+# 2. Data Loading and Validation Module
 def load_data(file_path, file_type='abf'):
-    """
-    Load electrophysiological data using appropriate loaders based on the file type.
-    
-    Args:
-    - file_path (str): Path to the data file (e.g., 'data/example_data.abf').
-    - file_type (str): Type of file ('abf' or 'neo'). Supports ABF (Axon Binary Format) and Neo formats.
-    
-    Returns:
-    - signal (np.ndarray): Loaded signal data as a NumPy array.
-    - sampling_rate (float): Sampling rate of the recording in Hz.
-    
-    Raises:
-    - DataLoadingError: If loading fails or the file type is unsupported.
-    """
-    if file_type == 'abf':
-        try:
+    """Load electrophysiological data using appropriate loaders based on the file type."""
+    try:
+        if file_type == 'abf':
             abf = pyabf.ABF(file_path)
             signal = abf.data[0]  # Assuming single-channel recording
             sampling_rate = abf.dataRate
             logging.info(f"Loaded ABF data from {file_path} with sampling rate {sampling_rate} Hz.")
-        except Exception as e:
-            logging.error(f"Failed to load ABF file: {e}")
-            raise DataLoadingError(f"Could not load ABF data from {file_path}.") from e
-    elif file_type == 'neo':
-        try:
+        elif file_type == 'neo':
             reader = neo.io.NeoHdf5IO(file_path)
             block = reader.read_block()
             segment = block.segments[0]
             signal = np.array(segment.analogsignals[0].magnitude).flatten()
             sampling_rate = segment.analogsignals[0].sampling_rate.magnitude
             logging.info(f"Loaded Neo data from {file_path} with sampling rate {sampling_rate} Hz.")
-        except Exception as e:
-            logging.error(f"Failed to load Neo file: {e}")
-            raise DataLoadingError(f"Could not load Neo data from {file_path}.") from e
-    else:
-        logging.error(f"Unsupported file type: {file_type}.")
-        raise DataLoadingError(f"Unsupported file type: {file_type}. Only 'abf' and 'neo' are supported.")
-    
-    validate_data(signal, sampling_rate)
-    return signal, sampling_rate
+        else:
+            logging.error(f"Unsupported file type: {file_type}.")
+            raise DataLoadingError(f"Unsupported file type: {file_type}. Only 'abf' and 'neo' are supported.")
+        validate_data(signal, sampling_rate)
+        return signal, sampling_rate
+    except Exception as e:
+        log_exception(e)
+        raise
 
 def validate_data(signal, sampling_rate):
-    """
-    Validate the integrity and format of the loaded data.
-    
-    Args:
-    - signal (np.ndarray): Loaded signal data.
-    - sampling_rate (float): Sampling rate of the recording.
-    
-    Raises:
-    - ValueError: If the data is not in the expected format or contains invalid values.
-    """
+    """Validate the integrity and format of the loaded data."""
     if not isinstance(signal, np.ndarray) or signal.ndim != 1:
         logging.error("Signal data must be a one-dimensional NumPy array.")
         raise ValueError("Signal data must be a one-dimensional NumPy array.")
-    
     if not isinstance(sampling_rate, (int, float)) or sampling_rate <= 0:
         logging.error("Sampling rate must be a positive number.")
         raise ValueError("Sampling rate must be a positive number.")
-    
     logging.info("Data validation passed. Signal and sampling rate are valid.")
 
-# 2. Preprocessing Module
+# 3. Preprocessing Module
 def preprocess_signal(signal, sampling_rate, detrend_signal=True, freq_min=1, freq_max=100):
-    """
-    Preprocess the loaded signal by detrending and bandpass filtering.
-    
-    Args:
-    - signal (np.ndarray): Raw signal data.
-    - sampling_rate (float): Sampling rate of the recording.
-    - detrend_signal (bool): Whether to detrend the signal.
-    - freq_min (float): Minimum frequency for bandpass filter.
-    - freq_max (float): Maximum frequency for bandpass filter.
-    
-    Returns:
-    - preprocessed_signal (np.ndarray): Preprocessed signal.
-    """
-    if detrend_signal:
-        signal = detrend(signal)
-    sos = butter(4, [freq_min, freq_max], btype='bandpass', fs=sampling_rate, output='sos')
-    preprocessed_signal = sosfilt(sos, signal)
-    logging.info("Signal preprocessed with bandpass filtering and detrending.")
-    return preprocessed_signal
-
-# 3. Response Analysis Module
-def detect_firing_rate_change(signal, sampling_rate, baseline_period=(0, 10), drug_period=(10, 20)):
-    """
-    Detect changes in firing rates before and after drug application.
-    
-    Args:
-    - signal (np.ndarray): Preprocessed signal data.
-    - sampling_rate (float): Sampling rate of the recording.
-    - baseline_period (tuple): Time window (start, end) in seconds for baseline period. Default is (0, 10).
-    - drug_period (tuple): Time window (start, end) in seconds for drug application period. Default is (10, 20).
-    
-    Returns:
-    - baseline_rate (float): Firing rate during baseline period.
-    - drug_rate (float): Firing rate during drug period.
-    """
-    baseline_start, baseline_end = int(baseline_period[0] * sampling_rate), int(baseline_period[1] * sampling_rate)
-    drug_start, drug_end = int(drug_period[0] * sampling_rate), int(drug_period[1] * sampling_rate)
-    
-    baseline_signal = signal[baseline_start:baseline_end]
-    drug_signal = signal[drug_start:drug_end]
-    
-    # Calculate firing rates
-    baseline_rate = len(find_peaks(baseline_signal)[0]) / (baseline_end - baseline_start) * sampling_rate
-    drug_rate = len(find_peaks(drug_signal)[0]) / (drug_end - drug_start) * sampling_rate
-    
-    logging.info(f"Baseline firing rate: {baseline_rate:.2f} Hz, Drug period firing rate: {drug_rate:.2f} Hz.")
-    
-    return baseline_rate, drug_rate
-
-# 4. Dose-Response Curve Fitting Module
-def fit_dose_response(doses, responses):
-    """
-    Fit a dose-response curve using a sigmoidal function.
-    
-    Args:
-    - doses (np.ndarray): Concentrations of the pharmacological agent.
-    - responses (np.ndarray): Observed responses (e.g., firing rates).
-    
-    Returns:
-    - popt (np.ndarray): Optimized parameters for the sigmoidal curve.
-    - pcov (np.ndarray): Covariance matrix of the parameters.
-    """
-    def sigmoid(x, EC50, hill_slope, max_response):
-        return max_response / (1 + (EC50 / x) ** hill_slope)
-
+    """Preprocess the loaded signal by detrending and bandpass filtering."""
     try:
-        popt, pcov = curve_fit(sigmoid, doses, responses, bounds=(0, [1000., 10., 100.]))
-        logging.info("Successfully fitted dose-response curve.")
-    except RuntimeError as e:
-        logging.error(f"Failed to fit dose-response curve: {e}")
-        raise AnalysisError("Curve fitting failed. Check your dose-response data.") from e
-    
-    return popt, pcov
+        if detrend_signal:
+            signal = detrend(signal)
+        sos = butter(4, [freq_min, freq_max], btype='bandpass', fs=sampling_rate, output='sos')
+        preprocessed_signal = sosfilt(sos, signal)
+        logging.info("Signal preprocessed with bandpass filtering and detrending.")
+        return preprocessed_signal
+    except Exception as e:
+        log_exception(e)
+        raise
 
-# 5. Visualization Module
-def plot_results(signal, sampling_rate, event_times=None, doses=None, responses=None, popt=None):
+# 4. Spike Sorting Module
+def sort_spikes(recording, sorter_name='kilosort2', gpu_available=False):
     """
-    Visualize the pharmacological modulation analysis results.
+    Perform spike sorting on the preprocessed data.
     
     Args:
-    - signal (np.ndarray): Preprocessed signal data.
-    - sampling_rate (float): Sampling rate of the recording.
-    - event_times (np.ndarray): Times of detected synaptic events. Default is None.
-    - doses (np.ndarray): Drug concentrations. Default is None.
-    - responses (np.ndarray): Observed responses. Default is None.
-    - popt (np.ndarray): Parameters for the dose-response curve. Default is None.
+    - recording (si.BaseRecording): Preprocessed recording data.
+    - sorter_name (str): Name of the sorting algorithm to use (e.g., 'kilosort2').
+    - gpu_available (bool): If True, use GPU acceleration if available.
+    
+    Returns:
+    - sorting (si.BaseSorting): Sorted spike data.
     """
-    # Plot raw signal with detected events
-    time_vector = np.arange(len(signal)) / sampling_rate
-    plt.figure(figsize=(10, 4))
-    plt.plot(time_vector, signal, label='Preprocessed Signal')
-    if event_times is not None:
-        plt.scatter(event_times, signal[(event_times * sampling_rate).astype(int)], color='r', label='Detected Events')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Amplitude')
-    plt.title('Pharmacological Modulation Analysis')
-    plt.legend()
-    plt.show()
+    try:
+        sorter_params = ss.get_default_params(sorter_name)
+        if gpu_available:
+            sorter_params['gpu'] = True
+        sorting = ss.run_sorter(sorter_name, recording, output_folder='sorting_output', **sorter_params)
+        logging.info("Spike sorting completed.")
+        return sorting
+    except Exception as e:
+        log_exception(e)
+        raise
 
-    # Plot dose-response curve
-    if doses is not None and responses is not None and popt is not None:
-        fig = px.scatter(x=doses, y=responses, labels={'x': 'Dose', 'y': 'Response'}, title='Dose-Response Curve')
-        dose_range = np.linspace(min(doses), max(doses), 100)
-        fig.add_trace(px.line(x=dose_range, y=sigmoid(dose_range, *popt), name='Fitted Curve').data[0])
-        fig.show()
-
-# Main function
-def main(file_path, file_type='abf', doses=None, responses=None):
+# 5. Spike Feature Extraction and Dimensionality Reduction Module
+def extract_and_reduce_features(recording_preprocessed, sorting, method='pca', n_components=2):
     """
-    Main function to perform pharmacological modulation analysis.
+    Extract spike features and perform dimensionality reduction.
     
     Args:
-    - file_path (str): Path to the data file.
-    - file_type (str): Type of file ('abf' or 'neo'). Default is 'abf'.
-    - doses (np.ndarray): Concentrations of pharmacological agents. Default is None.
-    - responses (np.ndarray): Observed responses. Default is None.
+    - recording_preprocessed (si.BaseRecording): Preprocessed recording data.
+    - sorting (si.BaseSorting): Sorted spike data.
+    - method (str): Dimensionality reduction method ('pca', 'tsne', 'umap').
+    - n_components (int): Number of dimensions to reduce to.
+    
+    Returns:
+    - reduced_features (np.ndarray): Dimensionality-reduced spike features.
     """
-    # Step 1: Load Data
-    signal, sampling_rate = load_data(file_path, file_type)
+    try:
+        # Extract waveforms
+        waveform_extractor = spost.WaveformExtractor.create(recording_preprocessed, sorting, folder='waveforms', remove_existing_folder=True)
+        waveform_extractor.set_params(ms_before=1.5, ms_after=2.5)
+        waveform_extractor.run()
+        features = waveform_extractor.get_all_features()
+        
+        # Dimensionality reduction
+        if method == 'pca':
+            reducer = skd.PCA(n_components=n_components)
+        elif method == 'tsne':
+            reducer = skm.TSNE(n_components=n_components)
+        elif method == 'umap':
+            reducer = umap.UMAP(n_components=n_components)
+        else:
+            raise ValueError("Invalid dimensionality reduction method.")
+        reduced_features = reducer.fit_transform(features)
+        logging.info(f"Dimensionality reduction using {method} completed.")
+        return reduced_features
+    except Exception as e:
+        log_exception(e)
+        raise
+
+# 6. Clustering and Network Dynamics Module
+def cluster_spikes(reduced_features, method='hdbscan'):
+    """
+    Cluster spikes using advanced clustering algorithms like HDBSCAN.
     
-    # Step 2: Preprocess Data
-    preprocessed_signal = preprocess_signal(signal, sampling_rate)
+    Args:
+    - reduced_features (np.ndarray): Dimensionality-reduced spike features.
+    - method (str): Clustering method ('hdbscan').
     
-    # Step 3: Detect Changes in Firing Rate
-    baseline_rate, drug_rate = detect_firing_rate_change(preprocessed_signal, sampling_rate)
+    Returns:
+    - labels (np.ndarray): Cluster labels for each spike.
+    """
+    try:
+        clusterer = hdbscan.HDBSCAN(min_cluster_size=10)
+        labels = clusterer.fit_predict(reduced_features)
+        logging.info(f"Spike clustering using {method} completed.")
+        return labels
+    except Exception as e:
+        log_exception(e)
+        raise
+
+def compute_graph_metrics(G):
+    """
+    Compute basic graph metrics like degree, betweenness, closeness centrality.
     
-    # Step 4: Fit Dose-Response Curve (if doses and responses are provided)
-    if doses is not None and responses is not None:
-        popt, pcov = fit_dose_response(doses, responses)
-        plot_results(preprocessed_signal, sampling_rate, doses=doses, responses=responses, popt=popt)
-    else:
-        plot_results(preprocessed_signal, sampling_rate)
+    Args:
+    - G (networkx.Graph): Network graph.
+    
+    Returns:
+    - metrics (dict): Computed graph metrics.
+    """
+    metrics = {
+        'degree': dict(nx.degree(G)),
+        'betweenness': nx.betweenness_centrality(G),
+        'closeness': nx.closeness_centrality(G)
+    }
+    return metrics
+
+# 7. Visualization Module
+def plot_clusters(reduced_features, labels):
+    """
+    Plot clusters of spikes in 2D or 3D space.
+    
+    Args:
+    - reduced_features (np.ndarray): Dimensionality-reduced spike features.
+    - labels (np.ndarray): Cluster labels for each spike.
+    """
+    fig = px.scatter(x=reduced_features[:, 0], y=reduced_features[:, 1], color=labels.astype(str))
+    fig.update_layout(title="Spike Clustering", xaxis_title="Component 1", yaxis_title="Component 2")
+    fig.show()
+
+# Main function to orchestrate the full analysis workflow
+def main(config):
+    """Main function to perform integrated analysis using configuration parameters."""
+    try:
+        # Load configuration parameters
+        file_path = config['data']['file_path']
+        file_type = config['data']['file_type']
+        gpu_available = config['spike_sorting']['gpu_available']
+        freq_min = config['preprocessing']['freq_min']
+        freq_max = config['preprocessing']['freq_max']
+        sorter_name = config['spike_sorting']['sorter_name']
+        
+        # Load and preprocess data
+        signal, sampling_rate = load_data(file_path, file_type)
+        preprocessed_signal = preprocess_signal(signal, sampling_rate, freq_min=freq_min, freq_max=freq_max)
+        
+        # Spike Sorting
+        recording = si.BaseRecording(signal, sampling_rate)
+        recording_preprocessed = preprocess_data(recording, freq_min, freq_max)
+        sorting = sort_spikes(recording_preprocessed, sorter_name, gpu_available)
+        
+        # Spike Feature Extraction and Reduction
+        reduced_features = extract_and_reduce_features(recording_preprocessed, sorting)
+        
+        # Clustering and Network Dynamics
+        labels = cluster_spikes(reduced_features)
+        G = create_network(connectivity_matrix)
+        plot_clusters(reduced_features, labels)
+
+        # Visualization and Result Presentation
+        plot_network(G, communities)
+        
+    except Exception as e:
+        log_exception(e)
+        raise
 
 if __name__ == "__main__":
-    example_file_path = 'data/example_data.abf'  # Adjust the path for your dataset
-    main(example_file_path)
+    config = load_config('config_analysis.yaml')
+    main(config)
